@@ -1,0 +1,38 @@
+1.SELECT CustNo,CustFirstName,CustLastName,CustCity
+FROM Customer
+WHERE CustBal >= 150 AND CustNo IN
+(SELECT CustNo
+FROM OrderTbl
+WHERE OrdDate LIKE '2004-02%')
+2.SELECT CustNo,CustFirstName,CustLastName 
+FROM customer 
+WHERE CustState ='CO' 
+AND CustNo NOT IN (SELECT CustNo FROM ordertbl 
+WHERE OrdDate LIKE '2004-02%')
+3.SELECT CustNo,CustFirstName,CustLastName 
+FROM customer 
+WHERE CustState ='CO' 
+AND EXISTS (SELECT CustNo 
+FROM ordertbl 
+WHERE OrdDate 
+LIKE '2004-02%')
+4.SELECT ordertbl.OrdNo,ordertbl.OrdDate
+FROM Ordertbl,Product,Ordline
+WHERE Ordertbl.OrdNo=Ordline.OrdNo 
+AND Ordline.ProdNo=Product.ProdNo 
+AND Product.ProdName 
+Like '%Ink Jet%'
+GROUP BY OrdNo
+HAVING COUNT(*)=(SELECT COUNT(*) 
+                 FROM product 
+                 WHERE product.ProdName 
+                 LIKE '%Ink Jet%')
+5.SELECT a.OrdNo, a.OrdDate
+FROM(SELECT ordertbl.OrdNo,orddate,prodname
+     FROM ordertbl,ordline,product
+     WHERE ordertbl.OrdNo=ordline.OrdNo AND ordline.ProdNo =product.ProdNo AND prodname LIKE '%Laser Printer%') AS a, (SELECT ordertbl.OrdNo,orddate,prodname
+     FROM ordertbl,ordline,product
+     WHERE ordertbl.OrdNo=ordline.OrdNo AND ordline.ProdNo =product.ProdNo AND prodname LIKE '%Color Monitor%') AS b
+     WHERE a.OrdNo = b.OrdNo AND a.OrdDate = b.OrdDate AND
+     ((a.ProdName LIKE '%Laser Printer%' AND b.ProdName LIKE '%Color Monitor%') OR
+      (b.ProdName LIKE '%Laser Printer%' AND a.ProdName LIKE '%Color Monitor%'))
