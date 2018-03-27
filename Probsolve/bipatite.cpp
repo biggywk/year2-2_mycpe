@@ -32,10 +32,15 @@ void read()
 
 int main()
 {
-
-    int c=0;
-        cin>>n>>m;
+    int k;
+    cin>>k;
     deg[100010]={0};
+    int c=0;
+    bool bip;
+    while(k--)
+    {bip=false;
+cin>>n>>m;
+    init();
     for(int i=0;i<m;i++)
     {
         int u,v;
@@ -44,22 +49,21 @@ int main()
         adj[v].push_back(u);
         deg[u]++;deg[v]++;
     }
-    init();
-    for(int i=0;i<n;i++)
+    for(int i=0;i<m;i++)
     {
-        if(!visited[i])
+        if(deg[i]%2!=0)
         {
-            c++;}
-dfs(i);
-
-
+            bip=true;
+            break;
+        }
     }
-    if(m==1)
-    {
-        cout<<1;
-    }
-    else
-    cout<<c;
+    if(bip)
+        cout<<"yes"<<endl;
+        else
+            cout<<"no"<<endl;
+
+    for(int i=0;i<m;i++)
+        adj[i].clear();}
 return 0;
 }
 
