@@ -1,26 +1,67 @@
 #include<iostream>
 #include<vector>
 using namespace std;
+int n,m;
+vector<int> adj[100010];
+int deg[100010];
+void read()
+{
+
+}
+    bool visited[100010];
+    void init()
+    {
+        for(int i=0;i<n;i++)
+        {
+            visited[i]=false;
+        }
+    }
+    void dfs(int u)
+    {
+        visited[u]=true;
+        //cout<<u+1<<endl;
+        for(int d=0;d<deg[u];d++)
+        {
+            int v=adj[u][d];
+            if(!visited[v])
+            {
+                dfs(v);
+            }
+        }
+    }
+
 int main()
 {
-    int node,order;
-    cin>>node>>order;
-    int tmp,tmp1;
-    vector<int> v[node];
-    bool visited[node]={0};
-    while(order--)
+
+    int c=0;
+        cin>>n>>m;
+    deg[100010]={0};
+    for(int i=0;i<m;i++)
     {
-        cin>>tmp1>>tmp;
-        v[tmp1].push_back(tmp);
-        v[tmp].push_back(tmp1);
+        int u,v;
+        cin>>u>>v;u--;v--;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+        deg[u]++;deg[v]++;
     }
-    for(int j=0;j<node;j++)
-    for(int i=0; i<v[node].size();i++)
+    init();
+    for(int i=0;i<n;i++)
     {
+        if(!visited[i])
+        {
+            c++;}
+dfs(i);
+
 
     }
-
-
-
+    if(m==1)
+    {
+        cout<<1;
+    }
+    else
+    cout<<c;
 return 0;
 }
+
+
+
