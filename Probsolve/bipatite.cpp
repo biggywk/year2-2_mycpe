@@ -3,8 +3,8 @@
 #include<algorithm>
 using namespace std;
 int n,m;
-vector<int> adj[100010];
-int g[100010]={};
+
+int g[100010];
 bool visited[100010];
 void init()
 {
@@ -17,55 +17,71 @@ void init()
 
 int main()
 {
-    int k;
+    vector<int> adj[100010]={};
+    int k,z;
     cin>>k;
     int o,p;
     string x;
-    vector<int>::iterator it;
     while(k--)
     {
         x="yes";
-
-
         init();
         cin>>p>>o;
-        for(int i=0; i<o; i++)
+        for(int i=0;i<o;i++)
         {
             cin>>n>>m;
             n--;
             m--;
-            adj[m].push_back(n);
             adj[n].push_back(m);
-
+            adj[m].push_back(n);
             // cout<<g[n]<<g[m]<<endl;
         }
-        for( n=0; n<o; n++)
+       /* for(int i=0;i<p;i++)
+          for( int kuy=0; kuy<adj[i].size() ;kuy++)
         {
-            for( m=0; m<p; m++)
+            cout<<adj[i][kuy]<<endl;
+        }}*/
+       for( n=0; n<p; n++)
+        {
+            for( m=0; m<adj[n].size(); m++)
             {
+               // cout<<(visited[adj[n][m]])<<endl;
+
                 if(!visited[n])
                 {
                     visited[n]=true;
                     g[n]=1;
                 }
-                if(!visited[adj[n][m]])
+                if(!(visited[adj[n][m]]))
                 {
+                    visited[adj[n][m]]=true;
                     if(g[n]==1)
                     {
-                        g[adj[n][m]]=2;
+                        g[adj[n][m]]=-1;
                     }
                     else
+                    {
                         g[adj[n][m]]=1;
+                    }
+
+
                 }
+                z=g[adj[n][m]];
+                if(g[z]==g[n])
+                    x="no";
+                //cout<<(g[adj[n][m]])<<endl;
+                cout<<n<<" "<<m<<" "<<adj[n][m]<<endl;
             }
-            //cout<<g[n]<<g[m]<<endl;
-            if(g[n]==g[adj[n][m]])
-                x="no";
+
+        }
+
             if(o==2||p==1)
                 x="yes";
-        }
         cout<<x<<endl;
-
+        for(int bb=0;bb<o;bb++)
+        {
+            g[bb]=0;
+        }
     }
     return 0;
 }
