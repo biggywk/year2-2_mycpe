@@ -33,30 +33,7 @@ void read()
 int main()
 {
     int k;
-    cin>>k;
-    deg[100010]={0};
-    while(k--)
-    {bip=false;
-        cin>>n>>m;
-    init();
-    for(int i=0;i<m;i++)
-    {
-        int u,v;
-        cin>>u>>v;u--;v--;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
-        deg[u]++;deg[v]++;
-    }
-    for(int i=0;i<m;i++)
-    {
 
-
-    }
-    if(bip)cout<<"yes"<<endl;
-    else cout<<"no"<<endl;
-
-    for(int i=0;i<m;i++)
-        adj[i].clear();}
 return 0;
 }
 
