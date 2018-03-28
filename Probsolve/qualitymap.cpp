@@ -32,8 +32,39 @@ void read()
 
 int main()
 {
-    int k;
+    int n,m;
+    cin>>n>>m;
+    //vector<char> adj[n];
+    int lv1[n][m];
+    char tmp;
+        for(int j=0;j<m;j++)
+        {
+            cin>>tmp;
+            if(tmp=='$')
+            {
+                lv1[0][j+1]=1;
+                lv1[1][j-1]=1;
+            }
+            else if('#')
+            {
 
+            }
+        }
+    for(int i=1;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            cin>>tmp;
+            if(tmp=='$')
+            {
+
+            }
+            else if('#')
+            {
+
+            }
+        }
+    }
 return 0;
 }
 
