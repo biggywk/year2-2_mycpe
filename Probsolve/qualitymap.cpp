@@ -30,41 +30,44 @@ void read()
         }
     }
 
+int value[][4] = {
+    { 1, 1, 1, 1 },
+    { 0, 0, 0, 0 },
+};
+
+int lookup[256];
+
 int main()
 {
+    lookup['$'] = 0;
+    lookup['*'] = 0;
+
     int n,m;
     cin>>n>>m;
     //vector<char> adj[n];
-    int lv1[n][m];
+    int lv1[n+2][m+2]={};
+    //int lv2[n+1][m+1]={0};
     char tmp;
-        for(int j=0;j<m;j++)
-        {
-            cin>>tmp;
-            if(tmp=='$')
-            {
-                lv1[0][j+1]=1;
-                lv1[1][j-1]=1;
-            }
-            else if('#')
-            {
-
-            }
-        }
-    for(int i=1;i<n;i++)
+    for(int i=1;i<=n;i++)
     {
-        for(int j=0;j<m;j++)
+        for(int j=1;j<=m;j++)
         {
             cin>>tmp;
-            if(tmp=='$')
-            {
-
-            }
-            else if('#')
-            {
-
-            }
+            lv1[i][j - 1] = value[lookup[tmp]][0];
+            lv1[i][j + 1] = value[lookup[tmp]][1];
+            lv1[i - 1][j] = value[lookup[tmp]][2];
+            lv1[i + 1][j] = value[lookup[tmp]][3];
         }
     }
+        for(int i=0;i<=n+1;i++)
+    {
+        for(int j=0;j<=m+1;j++)
+        {
+            cout<<lv1[i][j];
+        }cout<<endl;
+    }
+
+
 return 0;
 }
 

@@ -4,7 +4,7 @@
 using namespace std;
 int n,m;
 vector<int> adj[100010];
-int g[100010];
+int g[100010]={};
 bool visited[100010];
 void init()
 {
@@ -26,6 +26,7 @@ int main()
     {
         x="yes";
 
+
         init();
         cin>>p>>o;
         for(int i=0; i<o; i++)
@@ -33,36 +34,38 @@ int main()
             cin>>n>>m;
             n--;
             m--;
-           // cout<<g[n]<<g[m]<<endl;
-            if(!visited[n])
-            {
-                visited[n]=true;
-                if(g[m]==1)
-                    g[n]=2;
-                else
-                    g[n]=1;
-            }
-            if(!visited[m])
+            adj[m].push_back(n);
+            adj[n].push_back(m);
 
+            // cout<<g[n]<<g[m]<<endl;
+        }
+        for( n=0; n<o; n++)
+        {
+            for( m=0; m<p; m++)
             {
-                visited[m]=true;
-                if(g[n]==1)
-                    g[m]=2;
-                else
-                    g[m]=1;
+                if(!visited[n])
+                {
+                    visited[n]=true;
+                    g[n]=1;
+                }
+                if(!visited[adj[n][m]])
+                {
+                    if(g[n]==1)
+                    {
+                        g[adj[n][m]]=2;
+                    }
+                    else
+                        g[adj[n][m]]=1;
+                }
             }
             //cout<<g[n]<<g[m]<<endl;
-            if(g[n]==g[m])
+            if(g[n]==g[adj[n][m]])
                 x="no";
+            if(o==2||p==1)
+                x="yes";
+        }
+        cout<<x<<endl;
 
-        }
-        if(o==2||p==1)
-            x="yes";
-       cout<<x<<endl;
-        for(int jo=0;jo<p;jo++)
-        {
-            g[jo]=0;
-        }
     }
     return 0;
 }

@@ -35,6 +35,7 @@ int main()
 
     int c=0;
         cin>>n>>m;
+
     deg[100010]={0};
     for(int i=0;i<m;i++)
     {
