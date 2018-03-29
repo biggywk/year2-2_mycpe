@@ -26,7 +26,9 @@ int main()
     int state=0;
     for(int i=0;i<m;i++)
     {
+
         cin>>tmp>>tmp1>>tmp2;
+        x:
         if(tmp>=codition[state][0])
         {
             passed[state][0]=true;;
@@ -39,13 +41,14 @@ int main()
         {
             passed[state][2]=true;;
         }
+
         if(passed[state][0]&&passed[state][1]&&passed[state][2])
         {
             state++;
             level++;
-            if(level==n)
-                break;
+            goto x;
         }
+
     }
 cout<<level;
 
