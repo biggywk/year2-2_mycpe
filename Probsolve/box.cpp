@@ -1,76 +1,100 @@
-// task : bipartite
 #include <iostream>
 #include <vector>
 #include <list>
+#include <map>
 using namespace std;
-#define MAX_N 100100
-vector <int> adj[MAX_N];
-int deg[MAX_N];
-bool visited[MAX_N];
-int layer[MAX_N];
-    int n,m;
-bool bfs(int s)
+vector<int> path[100010];
+int n,m;
+bool can(int p,int z)//row 3
 {
-    int color[n];
-    for(int i=0; i<n; i++){
-        visited[i] = false;
-        layer[i] = -1;
-        color[i]= -1;
-        }
-        layer[s] = 0;
-        color[s] = 1;
-        list<int> Q;
-        Q.push_back(s);
-        while(!Q.empty()){
-            int u = Q.front();
-            Q.pop_front();
-            visited[u] = true;
-            //cout << u+1<<","<<layer[u] <<endl;
-            for(int d=0;d<deg[u];d++){
-                int v = adj[u][d];
-                if(layer[v]==-1 && color[v]==-1){
-                    layer[v] = layer[u] +1;
-                    if(color[u]==0)
-                        color[v]=1;
-                    else if(color[u]==1)
-                        color[v]=0;
-                    Q.push_back(v);
-                }
-
-            }
-        }
-        return true;
-}
- void dfs(int u)
+    if(p==n-2)
     {
-        visited[u]=true;
-        //cout<<u+1<<endl;
-        for(int d=0;d<deg[u];d++)
+        return 1;
+    }
+    for(int i=0;i<path[p+1].size();i++)
+    {
+        if(path[p][z]==path[p+1][i])
         {
-            int v=adj[u][d];
-            if(!visited[v])
-            {
-                dfs(v);
-            }
+            return can(p+1,i);
         }
     }
+    //go left
+    int bo=1;
+    while(z-bo!=-1)
+    {
+        if((path[p][z])-1==path[p][z-bo])
+        {
+            return can(p,z-bo);
+        }bo++;
+    }
+    //go right
+    bo=1;
+    while(z+bo<path[p].size())
+    {
+        if((path[p][z])+1==path[p][z+bo])
+        {
+            return can(p,z+bo);
+        }bo++;
+    }
+}
 int main(){
 
     cin>>n>>m;
     char tmp;
     char arr[n][m];
+
     for(int j=0;j<n;j++)
     for(int i=0;i<m;i++)
         {
             cin>>tmp;
             arr[j][i]=tmp;
         }
-
-         for(int j=0;j<n;j++){
-    for(int i=0;i<m;i++)
+        for(int i=0;i<n;i++){
+    for(int j=0;j<m;j++)
+        {
+            if(arr[i][j]=='.')
+            {
+                if(arr[i][j+1]=='.'&&arr[i+1][j]=='.'&&arr[i+1][j+1]=='.')
+                {
+                    path[i].push_back(j);
+                }
+            }
+        }
+    }
+    if(n<=2)
+    {
+        for(int i=0;i<path[0].size();i++)
         {
 
-            cout<<arr[j][i];
-        }cout<<endl;}
+        }
+    }
+    else
+    {
+        for(int j=0;j<path[0].size();j++)//j=member
+    {
+        for(int z=0;z<path[1].size();z++)
+        {
+            if(path[0][j]==path[1][z])
+            {
+                if(can(1,z))
+                {
+                    cout<<"yes";
+                    goto gg;
+                }
+                else
+                {
+                    cout<<"no";
+                    goto gg;
+                }
+            }
+        }
+
+    }
+    }
+gg:
+          /*  for(int i=0;i<cangox.size();i++){
+cout<<cangox[i]<<" "<<cangoy[i]<<endl;
+            }*/
+
     return 0;
 }
