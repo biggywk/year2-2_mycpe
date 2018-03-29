@@ -8,22 +8,7 @@ vector <int> adj[MAX_N];
 int deg[MAX_N];
 bool visited[MAX_N];
 int layer[MAX_N];
-void read_input()
-{
-    int u,v;
-    cin >> n >> m;
-    for(int j=0; j<n; j++) {
-        deg[j] = 0;
-        //adj[j].clear;
-    }
-    for(int j=0;j<m;j++){
-        cin >> u >> v; u--; v--;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
-        deg[u]++;
-        deg[v]++;
-    }
-}
+    int n,m;
 bool bfs(int s)
 {
     int color[n];
@@ -70,14 +55,22 @@ bool bfs(int s)
         }
     }
 int main(){
-    int n,m;
+
     cin>>n>>m;
     char tmp;
-    vector<int>arr[n][m];
+    char arr[n][m];
     for(int j=0;j<n;j++)
     for(int i=0;i<m;i++)
         {
             cin>>tmp;
+            arr[j][i]=tmp;
         }
+
+         for(int j=0;j<n;j++){
+    for(int i=0;i<m;i++)
+        {
+
+            cout<<arr[j][i];
+        }cout<<endl;}
     return 0;
 }
