@@ -46,19 +46,31 @@ int main()
     cin>>n>>m;
     //vector<char> adj[n];
     int lv1[n+2][m+2]={};
-    //int lv2[n+1][m+1]={0};
+    int lv2[n+2][m+2]={};
     char tmp;
     for(int i=1;i<=n;i++)
     {
         for(int j=1;j<=m;j++)
         {
             cin>>tmp;
+            if(tmp=='*')
+            {
             lv1[i][j - 1] = value[lookup[tmp]][0];
             lv1[i][j + 1] = value[lookup[tmp]][1];
             lv1[i - 1][j] = value[lookup[tmp]][2];
             lv1[i + 1][j] = value[lookup[tmp]][3];
+            }
+            else if(tmp=='$')
+            {
+            lv2[i][j - 1] = value[lookup[tmp]][0];
+            lv2[i][j + 1] = value[lookup[tmp]][1];
+            lv2[i - 1][j] = value[lookup[tmp]][2];
+            lv2[i + 1][j] = value[lookup[tmp]][3];
+            }
         }
     }
+    int no=0;
+    int ob=0;
         for(int i=0;i<=n+1;i++)
     {
         for(int j=0;j<=m+1;j++)
@@ -66,7 +78,21 @@ int main()
             cout<<lv1[i][j];
         }cout<<endl;
     }
-
+            for(int i=1;i<=n+1;i++)
+    {
+        for(int j=1;j<=m+1;j++)
+        {
+            if(lv1[i][j]==1&&lv2[i][j]==1)
+            {
+                ob++;
+            }
+            else if(lv1[i][i]||lv2[i][j])
+            {
+                no++;
+            }
+        }
+    }
+    cout<<ob<<" "<<no<<endl;
 
 return 0;
 }

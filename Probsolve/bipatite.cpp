@@ -2,7 +2,7 @@
 #include<vector>
 #include<algorithm>
 using namespace std;
-int n,m;
+int n,m,sum=0;
 
 int g[100010];
 bool visited[100010];
@@ -17,72 +17,7 @@ void init()
 
 int main()
 {
-    vector<int> adj[100010]={};
-    int k,z;
-    cin>>k;
-    int o,p;
-    string x;
-    while(k--)
-    {
-        x="yes";
-        init();
-        cin>>p>>o;
-        for(int i=0;i<o;i++)
-        {
-            cin>>n>>m;
-            n--;
-            m--;
-            adj[n].push_back(m);
-            adj[m].push_back(n);
-            // cout<<g[n]<<g[m]<<endl;
-        }
-       /* for(int i=0;i<p;i++)
-          for( int kuy=0; kuy<adj[i].size() ;kuy++)
-        {
-            cout<<adj[i][kuy]<<endl;
-        }}*/
-       for( n=0; n<p; n++)
-        {
-            for( m=0; m<adj[n].size(); m++)
-            {
-               // cout<<(visited[adj[n][m]])<<endl;
 
-                if(!visited[n])
-                {
-                    visited[n]=true;
-                    g[n]=1;
-                }
-                if(!(visited[adj[n][m]]))
-                {
-                    visited[adj[n][m]]=true;
-                    if(g[n]==1)
-                    {
-                        g[adj[n][m]]=-1;
-                    }
-                    else
-                    {
-                        g[adj[n][m]]=1;
-                    }
-
-
-                }
-                z=g[adj[n][m]];
-                if(g[z]==g[n])
-                    x="no";
-                //cout<<(g[adj[n][m]])<<endl;
-                cout<<n<<" "<<m<<" "<<adj[n][m]<<endl;
-            }
-
-        }
-
-            if(o==2||p==1)
-                x="yes";
-        cout<<x<<endl;
-        for(int bb=0;bb<o;bb++)
-        {
-            g[bb]=0;
-        }
-    }
     return 0;
 }
 /*3 3 3 1 2 2 3 3 1 4 3 1 2 1 3 4 1 100 1000 71 53 99 97 57 30 98 14 74 60 7 30 1 47 93 79 10 33 72 18 44 89 27 59 22 6 22 60 55 79 99 64
