@@ -1,4 +1,3 @@
-// task : bipartite
 #include <iostream>
 #include <vector>
 #include <list>
@@ -12,13 +11,16 @@ int layer[MAX_N];
 void read_input()
 {
     int u,v;
-    cin >> n >> m;
-    for(int j=0; j<n; j++) {
-        deg[j] = 0;
-        //adj[j].clear;
+    cin>>n>>m;
+    for(int j=0;j<n;j++)
+    {
+        deg[j]=0;
     }
-    for(int j=0;j<m;j++){
-        cin >> u >> v; u--; v--;
+    for(int j=0;j<m;j++)
+    {
+        cin>>u>>v;
+        u--;
+        v--;
         adj[u].push_back(v);
         adj[v].push_back(u);
         deg[u]++;
@@ -28,52 +30,58 @@ void read_input()
 int bfs(int s)
 {
     int color[n];
-    for(int i=0; i<n; i++){
-        visited[i] = false;
-        layer[i] = -1;
-        color[i]= -1;
-        }
-        layer[s] = 0;
-        color[s] = 1;
-        list<int> q;
-        q.push_back(s);
-        while(!q.empty()){
-            int u = q.front();
-            q.pop_front();
-            visited[u] = true;
-            //cout << u+1<<","<<layer[u] <<endl;
-            for(int d=0;d<deg[u];d++){
-                int v = adj[u][d];
-                if(layer[v]==-1 && color[v]==-1){
-                    layer[v] = layer[u] +1;
-                    if(color[u]==0)
-                        color[v]=1;
-                    else if(color[u]==1)
-                        color[v]=0;
-                    q.push_back(v);
-                }
-                else if(color[v]==color[u])
-                {
-                    return 0;
-                }
+    for(int i=0;i<n;i++)
+    {
+        visited[i]=false;
+        layer[i]=-1;
+        color[i]=-1;
+    }
+    layer[s]=0;
+    color[s]=1;
+    list<int>q;
+    q.push_back(s);
+    while(!q.empty())
+    {
+        int u=q.front();
+        q.pop_front();
+        visited[u]=true;
+        for(int d=0;d<deg[u];d++)
+        {
+            int v=adj[u][d];
+            if(layer[v]==-1&&color[v]==-1)
+            {
+                layer[v]=layer[u] +1;
+                if(color[u]==0)
+                    color[v]=1;
+                else if(color[u]==1)
+                    color[v]=0;
+                q.push_back(v);
+            }
+            else if(color[v]==color[u])
+            {
+                return 0;
             }
         }
-        return 1;
+    }
+    return 1;
 }
-main(){
+int main()
+{
     int k;
     cin >> k;
-    for(int i=0;i<k;i++){
+    for(int i=0;i<k;i++)
+    {
         read_input();
         if(bfs(0))
         {
-            cout << "yes" <<endl;
+            cout<<"yes"<<endl;
         }
         else
-            cout << "no" <<endl;
+            cout<<"no"<<endl;
         for(int j=0;j<n;j++)
         {
             adj[j].clear();
         }
     }
+    return 0;
 }
