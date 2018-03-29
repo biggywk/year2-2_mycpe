@@ -1,100 +1,93 @@
 #include <iostream>
 #include <vector>
 #include <list>
-#include <map>
 using namespace std;
-vector<int> path[100010];
 int n,m;
-bool can(int p,int z)//row 3
-{
-    if(p==n-2)
-    {
-        return 1;
-    }
-    for(int i=0;i<path[p+1].size();i++)
-    {
-        if(path[p][z]==path[p+1][i])
-        {
-            return can(p+1,i);
-        }
-    }
-    //go left
-    int bo=1;
-    while(z-bo!=-1)
-    {
-        if((path[p][z])-1==path[p][z-bo])
-        {
-            return can(p,z-bo);
-        }bo++;
-    }
-    //go right
-    bo=1;
-    while(z+bo<path[p].size())
-    {
-        if((path[p][z])+1==path[p][z+bo])
-        {
-            return can(p,z+bo);
-        }bo++;
-    }
-}
 int main(){
 
     cin>>n>>m;
-    char tmp;
+    char tmp1;
     char arr[n][m];
-
+    vector<int> path[n];
+vector<int> go[n];
     for(int j=0;j<n;j++)
     for(int i=0;i<m;i++)
         {
-            cin>>tmp;
-            arr[j][i]=tmp;
+            cin>>tmp1;
+            arr[j][i]=tmp1;
         }
-        for(int i=0;i<n;i++){
+        for(int i=0;i<n-1;i++){
+
     for(int j=0;j<m;j++)
         {
+
             if(arr[i][j]=='.')
             {
                 if(arr[i][j+1]=='.'&&arr[i+1][j]=='.'&&arr[i+1][j+1]=='.')
                 {
                     path[i].push_back(j);
-                }
+            }
             }
         }
     }
-    if(n<=2)
+    int group;
+    for(int i=0;i<n-1;i++)
     {
-        for(int i=0;i<path[0].size();i++)
+            group=1;
+            go[i].push_back(group);
+        for(int j=0;j<(path[i].size())-1;j++)
         {
-
-        }
-    }
-    else
-    {
-        for(int j=0;j<path[0].size();j++)//j=member
-    {
-        for(int z=0;z<path[1].size();z++)
-        {
-            if(path[0][j]==path[1][z])
-            {
-                if(can(1,z))
+                if(path[i][j]+1==path[i][j+1])
                 {
-                    cout<<"yes";
-                    goto gg;
+
+                    go[i].push_back(group);
                 }
                 else
                 {
-                    cout<<"no";
-                    goto gg;
+                    group++;
+                    go[i].push_back(group);
+                }
+        }
+    }
+    list<int>eiei;
+    list<int>owow;
+    int tmp;
+ for(int j=0;j<go[0].size();j++)
+            {
+                eiei.push_back(path[0][j]);
+            }
+ for(int i=1;i<n-1;i++)
+        {
+                while(!eiei.empty())
+                {
+                    tmp=eiei.back();
+                    eiei.pop_back();
+                for(int j=0;j<go[i].size();j++)
+            {
+                if(tmp==path[i][j])
+                {
+                     group=go[i][j];
+                    for(int l=0;l<go[i].size();l++)
+                    {
+                        if(go[i][l]==group)
+                            owow.push_back(path[i][l]);
+                    }
                 }
             }
+            }
         }
-
+            while(!owow.empty())
+            {
+                tmp=owow.back();
+                eiei.push_back(tmp);
+                owow.pop_back();
+            }
+    if(eiei.empty())
+    {
+        cout<<"no";
     }
-    }
-gg:
-          /*  for(int i=0;i<cangox.size();i++){
-cout<<cangox[i]<<" "<<cangoy[i]<<endl;
-            }*/
+    else
+        cout<<"yes";
 
     return 0;
 }
