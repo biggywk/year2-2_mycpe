@@ -1,27 +1,38 @@
 #include<iostream>
 #include<vector>
 using namespace std;
-int n,m;
-vector<int> adj[100010];
-int deg[100010];
-bool visited[100010];
-void dfs(int u)
-{
-    visited[u]=true;
-    for(int d=0; d<deg[u]; d++)
+#define zebra 100100
+    vector<int> adj[zebra];
+    int group[zebra];
+    bool visited[zebra];
+    int deg[zebra];
+    int zzz;
+    void dfs(int u)
     {
-        int v=adj[u][d];
-        if(!visited[v])
+
+        visited[u]=true;
+        group[u]=zzz;
+        //cout<<u+1<<endl;
+        for(int d=0;d<deg[u];d++)
         {
-            dfs(v);
+            int v=adj[u][d];
+            if(!visited[v])
+            {
+                dfs(v);
+            }
         }
     }
-}
 int main()
 {
+    int n,m;
     cin>>n>>m;
     int k;
     cin>>k;
+
+    for(int i=0;i<n;i++)
+    {
+        visited[i]=false;
+    }
     for(int i=0; i<m; i++)
     {
         int u,v;
@@ -32,55 +43,26 @@ int main()
         adj[v].push_back(u);
         deg[u]++;
         deg[v]++;
+
+    }
+    for(int i=0;i<n;i++)
+    {zzz=i;
+        if(!visited[i])
+            dfs(i);
     }
     int o;
-    cin>>o>>m;
-    o--;
-    m--;
-    dfs(o);
-    if(visited[m])
-    {
-        cout<<"1"<<endl;
-    }
-    else
-        cout<<"0"<<endl;
-
-    for(int i=1; i<k; i++)
+    for(int i=0; i<k; i++)
     {
 
             cin>>o>>m;
             o--;
             m--;
-            if(visited[o])
+            if(group[o]==group[m])
             {
-                    if(visited[m])
-        {
-            cout<<"1"<<endl;
-        }
-        else
-        cout<<"0"<<endl;
-            }
-            else if(visited[m])
-            {
-            if(visited[o])
-    {
-        cout<<"1"<<endl;
-    }
-    else
-        cout<<"0"<<endl;
+                cout<<"1"<<endl;
             }
             else
-            {
-                dfs(o);
-                    if(visited[m])
-        {
-        cout<<"1"<<endl;
-        }
-        else
-        cout<<"0"<<endl;
-            }
-
-
+                cout<<"0"<<endl;
     }
 
 
