@@ -67,21 +67,19 @@ int bfs(int s)
 }
 int main()
 {
-    int k;
-    cin >> k;
-    for(int i=0;i<k;i++)
-    {
+
         read_input();
+        int question;
+        cin>>question;
+        while(question--)
+        {
         if(bfs(0))
         {
             cout<<"yes"<<endl;
         }
         else
             cout<<"no"<<endl;
-        for(int j=0;j<n;j++)
-        {
-            adj[j].clear();
+
         }
-    }
     return 0;
 }

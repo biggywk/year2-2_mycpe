@@ -2,9 +2,9 @@
 #include<vector>
 using namespace std;
 int n,m;
-vector<int> adj[100010];
-int deg[100010];
-bool visited[100010];
+    vector<int> adj[100010];
+    int deg[100010];
+    bool visited[100010];
 void dfs(int u)
 {
     visited[u]=true;
@@ -35,51 +35,28 @@ int main()
     }
     int o;
     cin>>o>>m;
-    o--;
-    m--;
+    o--;m--;
     dfs(o);
     if(visited[m])
-    {
-        cout<<"1"<<endl;
-    }
-    else
-        cout<<"0"<<endl;
-
-    for(int i=1; i<k; i++)
-    {
-
-            cin>>o>>m;
-            o--;
-            m--;
-            if(visited[o])
-            {
-                    if(visited[m])
         {
             cout<<"1"<<endl;
         }
         else
-        cout<<"0"<<endl;
-            }
-            else if(visited[m])
-            {
-            if(visited[o])
+            cout<<"0"<<endl;
+
+    for(int i=1;i<k;i++)
     {
-        cout<<"1"<<endl;
-    }
-    else
-        cout<<"0"<<endl;
-            }
-            else
-            {
-                dfs(o);
-                    if(visited[m])
+        cin>>o>>m;
+        o--;m--;
+        if(!visited())
         {
-        cout<<"1"<<endl;
+            dfs(o)
+            if()
         }
         else
-        cout<<"0"<<endl;
-            }
+        {
 
+        }
 
     }
 
