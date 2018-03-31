@@ -1,0 +1,76 @@
+﻿
+%----------------------------------------------------
+%Audio: Compos a song with matlab
+%use bass.wav guitar.wav drum.wav
+% compose three steam audio to be a song
+%---------------------------------------
+
+% อ่านไฟล์เสียงเครื่องดนตรีทั้ง 3 ชิ้น
+[bass Fsb]  =audioread('bass.wav');
+[guitar Fsg]=audioread('guitar.wav');
+[drums Fsd] =audioread('drums.wav');
+%---------------------------------------
+
+% แสดงผลรายละเอียดของตัวแปรที่เก็บค่าเสียงแบบดิจิตอล ซึ่งถูกเก็บเป็นไฟล์เสียง 
+% อ่านเข้ามาในระบบของ Matlab จะได้ 2 ตัวแปร คือ Sampling rate และ ค่าสัญญาณที่ถูกสุ่มมาตามจังหวะ
+%---------------------------------------
+Fsb
+Fsb==Fsg
+Fsb=Fsd
+drums
+size(drums)
+length(drums)
+length(drums)/Fsb
+
+% แสดงค่าความดังของเสียงกลอง ตามแกนเวลา
+drums_seg=drums(Fsb*10:Fsb*20);
+plot(drums_seg)
+
+% การเล่นเสียงดนตรีออกมาจะต้องส่งค่าสัญญาณออกด้วยจังหวะเดียวชองการสุ่มแปลงข้อมูล
+sound(drums_seg,Fsb);
+sound(drums_seg,Fsb*2);
+
+
+%compose การผลิตเสียงเพลง ซึ่งเกิดจากการผสมสัญญาณ 
+drum_seg=drums(Fsb*10:Fsb*20);
+guitar_seg=guitar(Fsb*10:Fsb*20);
+comp=drum_seg + guitar_seg ;
+sound(comp,Fsb);
+
+%All together
+bass_seg=bass(Fsb*10:Fsb*30);
+%will cuase an error
+comp=drum_seg + guitar_seg + bass_seg;
+
+%make correction
+bass_seg=bass(Fsb*10:Fsb*20);
+comp=drum_seg + guitar_seg + bass_seg;
+sound(comp,Fsb);
+
+%modify amplitude
+bass_seg=bass_seg*3;
+guitar_seg=guitar_seg*.3;
+comp=drum_seg + guitar_seg + bass_seg;
+sound(comp,Fsb);
+
+%slow change in drum
+drum_seg=drums(Fsb*10:Fsb*20);
+guitar_seg=guitar(Fsb*10:Fsb*20);
+bass_seg=bass(Fsb*10:Fsb*20);
+ramp=[0:1/(Fsb*10):1];
+ramp=ramp';
+size(ramp)
+size(drum_seg)
+drum_seg=drum_seg.*ramp;
+comp=drum_seg + guitar_seg + bass_seg;
+sound(comp,Fsb);
+
+%compose a stero song
+guitar_stero=[guitar_seg*0.7, guitar_seg*0.3];
+bass_stero=[bass_seg*0.3, bass_seg*0.7];
+drum_stero=[drum_seg,drum_seg];
+comp=drum_seg + guitar_seg + bass_seg;
+sound(comp,Fsb);
+
+
+

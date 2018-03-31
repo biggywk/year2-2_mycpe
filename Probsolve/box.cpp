@@ -8,37 +8,46 @@ int main()
     cin>>n>>m;
     char tmp1;
     char arr[n][m];
-    vector<int> adj[n];
+    vector<int>adjx[n-1];
+    vector<int>adjy[m-1];
+    vector<int>path[n-1];
     for(int to=0; to<n; to++)
         for(int so=0; so<m; so++)
         {
             cin>>tmp1;
             arr[to][so]=tmp1;
         }
-     for(int to=0; to<n-1; to++)
-        for(int so=0; so<m; so++)
+    for(int i=0; i<n-1; i++)
+    {
+        for(int j=0; j<m-1; j++)
         {
-            if(arr[to][so]=='.')
+
+            if(arr[i][j]=='.')
             {
-                if(arr[to][so+1]=='.'&&arr[to][so+1]=='.'&&arr[to+1][so+1]=='.'&&arr[to+1][so]=='.')
+                if(arr[i][j+1]=='.'&&arr[i+1][j]=='.'&&arr[i+1][j+1]=='.')
                 {
-                    adj[to].push_back(so);
+                    path[i].push_back(j);
                 }
             }
         }
-        /*
-        for(int i=0;i<n-1;i++)
+    }
+        for(int i=0; i<n-1; i++)
+    {
+        for(int j=0; j<m-1; j++)
         {
-            for(int j=0;j<adj[i].size();j++)
+            if((path[i][j])+1==path[i][j++])
             {
-                cout<<i<<adj[i][j]<<" ";
-            }cout<<endl;
-        }*/
-for(int i=0;i<n-1;i++)
-{
-
-}
-
+                adjx[i].push_back(path[i][j]);
+            }
+        }
+    }
+            for(int i=0; i<n-1; i++)
+    {
+        for(int j=0; j<adjx[i].size(); j++)
+        {
+            cout<<path[i][j]<<" ";
+        }cout<<endl;
+    }
 
     return 0;
 }

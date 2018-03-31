@@ -1,5 +1,6 @@
-#include<iostream>
+
 #include<vector>
+#include<stdio.h>
 using namespace std;
 #define zebra 100100
     vector<int> adj[zebra];
@@ -25,44 +26,44 @@ using namespace std;
 int main()
 {
     int n,m;
-    cin>>n>>m;
+    scanf("%d %d",&n,&m);
     int k;
-    cin>>k;
-
-    for(int i=0;i<n;i++)
+    scanf("%d",&k);
+   // printf("%d%d%d",n,m,k);
+    int i;
+    int u,v;
+    for( i=0;i<n;i++)
     {
         visited[i]=false;
     }
-    for(int i=0; i<m; i++)
+    for(i=0; i<m; i++)
     {
-        int u,v;
-        cin>>u>>v;
+
+        scanf("%d %d",&u,&v);
         u--;
         v--;
         adj[u].push_back(v);
         adj[v].push_back(u);
         deg[u]++;
         deg[v]++;
-
     }
-    for(int i=0;i<n;i++)
+    for( i=0;i<n;i++)
     {zzz=i;
         if(!visited[i])
             dfs(i);
     }
     int o;
-    for(int i=0; i<k; i++)
+    for(i=0; i<k; i++)
     {
-
-            cin>>o>>m;
+            scanf("%d %d",&o,&m);
             o--;
             m--;
             if(group[o]==group[m])
             {
-                cout<<"1"<<endl;
+                printf("1\n");
             }
             else
-                cout<<"0"<<endl;
+                printf("0\n");
     }
 
 
