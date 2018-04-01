@@ -34,7 +34,7 @@ void dst(int a,int b)
     }
     visited[a][b]=true;
 }
-main()
+int main()
 {
     int answer[2];
     answer[0]=0;
@@ -75,4 +75,5 @@ main()
     }
 
     cout<<answer[0]<<" "<<answer[1];
+    return 0;
 }
