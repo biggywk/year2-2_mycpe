@@ -1,101 +1,78 @@
-#include<iostream>
-#include<vector>
+#include <iostream>
 using namespace std;
-int n,m;
-vector<int> adj[100010];
-int deg[100010];
-void read()
+char adj[30][30];
+int checka[30][30];
+int checkb[30][30];
+bool visited[30][30];
+int n,m,i,j;
+int c=0;
+int d=0;
+int count =0;
+void dst(int a,int b)
 {
 
+    if(visited[a][b]==false&&adj[a][b]!='#')
+    {
+        if(adj[a][b]=='*')
+        {
+            checka[i][j]=1;
+        }
+        else if(adj[a][b]=='$')
+        {
+            checkb[i][j]=1;
+        }
+        count++;
+        visited[a][b]=true;
+        if(b+1<m&&visited[a][b+1]==false)
+            dst(a,b+1);
+        if(a+1<n&&visited[a+1][b]==false)
+            dst(a+1,b);
+        if(b-1>=0&&visited[a][b-1]==false)
+            dst(a,b-1);
+        if(a-1>=0&&visited[a-1][b]==false)
+            dst(a-1,b);
+    }
+    visited[a][b]=true;
 }
-    bool visited[100010];
-    void init()
-    {
-        for(int i=0;i<n;i++)
-        {
-            visited[i]=false;
-        }
-    }
-    void dfs(int u)
-    {
-        visited[u]=true;
-        //cout<<u+1<<endl;
-        for(int d=0;d<deg[u];d++)
-        {
-            int v=adj[u][d];
-            if(!visited[v])
-            {
-                dfs(v);
-            }
-        }
-    }
-
-int value[][4] = {
-    { 1, 1, 1, 1 },
-    { 0, 0, 0, 0 },
-};
-
-int lookup[256];
-
-int main()
+main()
 {
-    lookup['$'] = 0;
-    lookup['*'] = 0;
-
-    int n,m;
+    int answer[2];
+    answer[0]=0;
+    answer[1]=0;
     cin>>n>>m;
-    //vector<char> adj[n];
-    int lv1[n+2][m+2]={};
-    int lv2[n+2][m+2]={};
-    char tmp;
-    for(int i=1;i<=n;i++)
+    for(i=0; i<n; i++)
     {
-        for(int j=1;j<=m;j++)
+        for(j=0; j<m; j++)
         {
-            cin>>tmp;
-            if(tmp=='*')
-            {
-            lv1[i][j - 1] = value[lookup[tmp]][0];
-            lv1[i][j + 1] = value[lookup[tmp]][1];
-            lv1[i - 1][j] = value[lookup[tmp]][2];
-            lv1[i + 1][j] = value[lookup[tmp]][3];
-            }
-            else if(tmp=='$')
-            {
-            lv2[i][j - 1] = value[lookup[tmp]][0];
-            lv2[i][j + 1] = value[lookup[tmp]][1];
-            lv2[i - 1][j] = value[lookup[tmp]][2];
-            lv2[i + 1][j] = value[lookup[tmp]][3];
-            }
+            cin>>adj[i][j];
+            visited[i][j]=false;
         }
     }
-    int no=0;
-    int ob=0;
-        for(int i=0;i<=n+1;i++)
+    for(i=0; i<n; i++)
     {
-        for(int j=0;j<=m+1;j++)
+        for(j=0; j<m; j++)
         {
-            cout<<lv1[i][j];
-        }cout<<endl;
-    }
-            for(int i=1;i<=n+1;i++)
-    {
-        for(int j=1;j<=m+1;j++)
-        {
-            if(lv1[i][j]==1&&lv2[i][j]==1)
+            if(visited[i][j]==false)
             {
-                ob++;
-            }
-            else if(lv1[i][i]||lv2[i][j])
-            {
-                no++;
-            }
-        }
-    }
-    cout<<ob<<" "<<no<<endl;
 
-return 0;
+                dst(i,j);
+                if(checka[i][j] == 1 && checkb[i][j] ==1)
+                {
+
+                    answer[0] += count;
+                    count =0;
+                }
+                else if( checka[i][j] == 1 || checkb[i][j]==1)
+                {
+
+                    answer[1] += count;
+                    count =0;
+                }
+                else
+                    count=0;
+            }
+        }
+    }
+
+    cout<<answer[0]<<" "<<answer[1];
 }
-
-
-
