@@ -27,20 +27,20 @@ int main()
     {
         eandb=*it1;
         mn=tmp-*it1;
-        pos.erase(it1);
+        pos.erase(eandb);
     }
     else if (tmp-*it1<=*it-tmp)
     {
         eandb=*it1;
         mn=tmp-*it1;
-        pos.erase(it1);
+        pos.erase(eandb);
 
     }
     else
     {
         eandb=*it;
         mn=*it-tmp;
-        pos.erase(it);
+        pos.erase(eandb);
 
     }
     distance+=mn;
@@ -49,35 +49,7 @@ int main()
 
     while(--thing)
     {
-        cin>>tmp;
-        it=pos.lower_bound(tmp);
-        it1=it--;
-        if(it==pos.end())
-        {
-            pos.insert(eandb);
-            eandb=*it1;
-            mn=tmp-*it1;
-            distance+=mn;
-            pos.erase(it1);
-        }
-        else if (tmp-*it1<=*it-tmp)
-        {
-             pos.insert(eandb);
-            eandb=*it1;
-            mn=tmp-*it1;
-            distance+=mn;
-            pos.erase(it1);
-        }
-        else
-        {
-             pos.insert(eandb);
-            eandb=*it;
-            mn=*it-tmp;
-            distance+=mn;
-            pos.erase(it);
-        }
-        distance+=mn;
-        //  cout<<"distance "<<distance<<endl;
+
     }
     cout<<distance;
     return 0;
