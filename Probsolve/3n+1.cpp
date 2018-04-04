@@ -1,8 +1,6 @@
 #include <cstdio>
 #include <algorithm>
-#define long long LL
 using namespace std;
-
 int main ()
 {
     int i,j;
