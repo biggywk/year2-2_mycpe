@@ -6,10 +6,12 @@ int n,q;
 int arr[100010];
 int find(int i)
 {
+   // cout<<arr[i]<<endl;
     while(arr[i]!=i)
     {
         arr[i]=arr[arr[i]];
         i=arr[i];
+    //cout<<arr[i]<<endl;
     }
     return i;
 }
