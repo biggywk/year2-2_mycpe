@@ -25,7 +25,8 @@ while(n--)
         if(index==0)
             cout<<arr[index]<<endl;
             else
-                cout<<arr[index]-arr[index-1]<<endl;    }
+                cout<<arr[index]-arr[index-1]<<endl;
+                }
 }
 
 return 0;
