@@ -6,26 +6,26 @@ int main()
 {
     int n,q;
     cin>>n>>q;
-    int* array[n/2];
+
+    int* array[n/2] ;
     char order;
-    int index1;
+    int index1,index2;
     int x=0;
     int value;
-    int k=n;
     vector<int> range;
     while(n>2)
     {
         range.push_back(n);
         n++;
         array[x] = new int[n];
+
         x++;
         n/=2;
     }
     array[x]=new int[1];
-    //cout<<x<<endl;
-
-   // for(int i=0;i<range.size();i++)
-        //cout<<range[i]<<endl;
+    cout<<x<<endl;
+    for(int i=0;i<range.size();i++)
+        cout<<range[i]<<endl;
         while(q--)
         {
             cin>>order;
@@ -39,17 +39,15 @@ int main()
                     index1++;
                     x++;
                     index1/=2;
+
                 }
 
 
             }
             else if(order=='q'||order=='Q')
             {
-                cin>>index1;
-            }
-            for(int i=0;i<k;i++)
-            {
-                cout<<array[0][i]<<endl;
+                cin>>index1>>index2;
+
             }
         }
         return 0;
