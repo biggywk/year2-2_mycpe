@@ -1,0 +1,13 @@
+INSERT INTO Brand_Collection (ProductID, BrandName, ColeectionName)
+VALUES (, , );
+
+-------------
+insert too many role
+1.save excel as .cvs
+2.erase header
+3.use import in phpmyadmin and choose file
+4.fill header in  colunm name
+ex.u have   ----------
+            |___x|___o|
+            |____|____|
+fill   x,o        in form
