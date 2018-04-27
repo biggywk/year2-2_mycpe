@@ -1,0 +1,21 @@
+PaymentID,PaymentName,BankName
+00,Cash,NULL
+01,Banking,BualuangBanking
+02,Banking,KBANK
+03,Banking,KTB
+04,Banking,TMB
+05,Banking,SCB
+06,Banking,KrungsriBank
+07,Banking,KiatnakinBank
+08,Banking,CIMB
+09,Banking,TiscoBank
+10,Banking,ThanachartBank
+11,Banking,UOB
+12,Banking,SC(Thai)
+13,Banking,TRC
+14,Banking,LHBANK
+15,Banking,ICBC(Thai)
+16,Banking,SME development bank
+17,Banking,BAAC
+18,Banking,EXIM
+19,Banking,GSB
