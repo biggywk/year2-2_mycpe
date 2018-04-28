@@ -18,14 +18,13 @@ int main()
         range.push_back(n);
         n++;
         array[x] = new int[n];
-
         x++;
         n/=2;
     }
     array[x]=new int[1];
-    cout<<x<<endl;
+    //cout<<x<<endl;
     for(int i=0;i<range.size();i++)
-        cout<<range[i]<<endl;
+        //cout<<range[i]<<endl;
         while(q--)
         {
             cin>>order;
